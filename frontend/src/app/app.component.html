@@ -1,0 +1,62 @@
+<div class="page">
+  <header class="site-header">
+    <div class="brand-mark">Y</div>
+    <div>
+      <p class="eyebrow">YOUR CAR YOUR WAY</p>
+      <h1>Messagerie d'assistance</h1>
+      <p class="subtitle">Preuve de concept du Projet 7 · Mission Option B</p>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel login-panel">
+      <h2>Connexion de démonstration</h2>
+      <p>Ouvre cette page dans deux navigateurs. Le premier représente le client, le second le conseiller.</p>
+      <form class="login-form" (ngSubmit)="connect()">
+        <label for="role">Profil</label>
+        <select id="role" name="role" [(ngModel)]="role" [disabled]="connected()">
+        <option value="client">Client</option>
+        <option value="conseiller">Conseiller</option>
+      </select>
+        <label for="token">Jeton de ce profil</label>
+        <input id="token" name="token" [(ngModel)]="token" type="password" autocomplete="off"
+               placeholder="Voir le fichier .env" [disabled]="connected()" />
+        <button class="primary" type="submit" [disabled]="connected()">Se connecter</button>
+        <button class="secondary" type="button" (click)="disconnect()" [disabled]="!connected()">Se déconnecter</button>
+      </form>
+      <p class="status" role="status" [class.is-online]="connected()">{{ status() }}</p>
+      <div class="note">
+        <strong>Périmètre limité.</strong>
+        <p>Cette page n'effectue ni réservation ni paiement. Les jetons sont réservés aux essais locaux.</p>
+      </div>
+    </aside>
+
+    <main class="panel chat-panel" aria-label="Discussion de démonstration">
+      <div class="conversation-heading">
+        <div>
+          <p class="eyebrow">CONVERSATION 001</p>
+          <h2>Question sur une location</h2>
+        </div>
+        <span class="pill">PoC</span>
+      </div>
+      <section class="message-list" role="log" aria-live="polite" aria-label="Messages de la conversation">
+        <p class="empty" *ngIf="messages().length === 0">Connecte-toi pour consulter l'historique et commencer la discussion.</p>
+        <article *ngFor="let message of messages()" class="bubble" [class.own]="message.sender === role">
+          <span class="sender">{{ message.sender === 'client' ? 'Client' : 'Conseiller' }}</span>
+          <p>{{ message.content }}</p>
+          <time [attr.datetime]="message.createdAt">{{ message.createdAt | date:'dd/MM/yyyy HH:mm' }}</time>
+        </article>
+      </section>
+      <form class="composer" (ngSubmit)="send()">
+        <label for="message">Message</label>
+        <div class="compose-row">
+          <input id="message" type="text" [(ngModel)]="draft" name="message"
+                 maxlength="1000" [disabled]="!connected()"
+                 placeholder="Écris ton message…" />
+          <button class="primary" type="submit" [disabled]="!connected() || !draft.trim()">Envoyer</button>
+        </div>
+      </form>
+    </main>
+  </div>
+  <footer>Exercice technique local. Aucune donnée de client réel ne doit être saisie.</footer>
+</div>

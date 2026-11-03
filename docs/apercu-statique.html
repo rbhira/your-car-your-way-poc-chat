@@ -1,0 +1,48 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aperçu visuel statique</title><style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #f7f5fc; color: #211b35; font-family: 'DM Sans', Arial, sans-serif; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+.page { max-width: 1180px; margin: 0 auto; padding: 44px 28px 24px; }
+.site-header { display: flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+.brand-mark { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 20px; background: #643cba; color: #fff; font-size: 32px; font-weight: 700; box-shadow: 0 12px 26px #643cba33; }
+.eyebrow { color: #7757b3; text-transform: uppercase; font-size: 12px; font-weight: 700; letter-spacing: 1.6px; margin: 0 0 10px; }
+h1 { font-size: 30px; letter-spacing: -.6px; line-height: 1.14; margin: 0 0 8px; }
+.subtitle { color: #6f6781; margin: 0; font-size: 14px; }
+.layout { display: grid; grid-template-columns: 330px minmax(0, 1fr); gap: 22px; }
+.panel { background: #fff; border: 1px solid #e9e4f4; border-radius: 18px; box-shadow: 0 12px 30px #3e24590d; }
+.login-panel { padding: 29px; align-self: start; }
+h2 { font-size: 19px; margin: 0 0 16px; letter-spacing: -.3px; }
+.login-panel > p { font-size: 14px; line-height: 1.65; color: #716985; margin: 0 0 27px; }
+label { display: block; margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: #413753; }
+input, select { width: 100%; background: #fff; border: 1px solid #ccc4dd; border-radius: 10px; padding: 12px; outline-offset: 2px; }
+input:focus-visible, select:focus-visible { outline: 2px solid #a17aff; }
+button { border-radius: 10px; border: 0; font-weight: 700; padding: 12px 15px; transition: background .15s; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+.primary { background: #6840bb; color: white; }
+.primary:hover:not(:disabled) { background: #512f9b; }
+.secondary { color: #6840bb; background: #f0eafa; }
+.login-panel button { width: 100%; margin-top: 13px; }
+.status { font-weight: 700; padding: 13px; border-radius: 10px; background: #f9eeee; color: #98595d !important; margin: 21px 0 !important; }
+.status.is-online { background: #eaf8f0; color: #1e8658 !important; }
+.note { padding: 16px; border-top: 1px solid #e6e0ee; font-size: 13px; line-height: 1.6; color: #625974; }
+.note p { margin: 7px 0 0; }
+.chat-panel { display: flex; flex-direction: column; min-height: 570px; overflow: hidden; }
+.conversation-heading { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e9e3f0; padding: 26px 27px 15px; }
+.conversation-heading h2 { margin-bottom: 6px; }
+.pill { border-radius: 999px; background: #f0eafa; color: #6544a8; padding: 8px 12px; font-size: 12px; font-weight: 700; }
+.message-list { padding: 27px; display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: 18px; max-height: 480px; overflow-y: auto; }
+.empty { background: #f9f7ff; border: 1px dashed #d2c7e8; color: #756a88; padding: 24px; width: 100%; border-radius: 14px; text-align: center; line-height: 1.6; }
+.bubble { padding: 14px 17px; border: 1px solid #e7def3; border-radius: 15px 15px 15px 3px; background: #f9f7fd; width: fit-content; max-width: 85%; }
+.bubble.own { align-self: flex-end; border: 1px solid #6840bb; border-radius: 15px 15px 3px 15px; background: #6840bb; color: #fff; }
+.sender { display: block; font-size: 12px; font-weight: 700; opacity: .75; margin-bottom: 7px; }
+.bubble p { margin: 0; line-height: 1.45; white-space: pre-wrap; overflow-wrap: anywhere; }
+.bubble time { display: block; opacity: .6; margin-top: 7px; text-align: right; font-size: 11px; }
+.composer { padding: 19px 27px 25px; border-top: 1px solid #e9e3f0; }
+.composer label { margin: 0 0 10px; }
+.compose-row { display: flex; gap: 10px; }
+.compose-row input { flex: 1; }
+.compose-row button { min-width: 110px; }
+footer { font-size: 12px; color: #7b718c; text-align: center; margin: 22px 0; }
+@media (max-width: 800px) { .page { padding: 24px 15px; } .layout { grid-template-columns: 1fr; } .site-header { align-items: flex-start; } h1 { font-size: 24px; } }
+</style></head><body><div class="page"><header class="site-header"><div class="brand-mark">Y</div><div><p class="eyebrow">YOUR CAR YOUR WAY</p><h1>Messagerie d'assistance</h1><p class="subtitle">Preuve de concept du Projet 7 · Mission Option B</p></div></header><div class="layout"><aside class="panel login-panel"><h2>Connexion de démonstration</h2><p>Ouvre cette page dans deux navigateurs. Le premier représente le client, le second le conseiller.</p><label>Profil</label><select><option>Client</option></select><label>Jeton de ce profil</label><input type="password" placeholder="Voir le fichier .env"><button class="primary">Se connecter</button><button class="secondary">Se déconnecter</button><p class="status is-online">Connecté comme client</p><div class="note"><strong>Périmètre limité.</strong><p>Cette page n'effectue ni réservation ni paiement. Les jetons sont réservés aux essais locaux.</p></div></aside><main class="panel chat-panel"><div class="conversation-heading"><div><p class="eyebrow">CONVERSATION 001</p><h2>Question sur une location</h2></div><span class="pill">PoC</span></div><section class="message-list"><article class="bubble own"><span class="sender">Client</span><p>Bonjour, pouvez-vous me renseigner sur une location ?</p><time>31/10/2026 18:30</time></article><article class="bubble"><span class="sender">Conseiller</span><p>Bonjour ! Quelles sont vos dates de départ et de retour ?</p><time>31/10/2026 18:31</time></article><article class="bubble own"><span class="sender">Client</span><p>Du 12 au 15 novembre, au départ de Bordeaux.</p><time>31/10/2026 18:31</time></article></section><form class="composer"><label>Message</label><div class="compose-row"><input placeholder="Écris ton message…"><button class="primary">Envoyer</button></div></form></main></div><footer>APERÇU STATIQUE, NON CONNECTÉ AU BACKEND. Aucun test d'intégration n'est représenté.</footer></div></body></html>

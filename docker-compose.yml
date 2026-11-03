@@ -1,0 +1,42 @@
+name: ycyw-poc-tchat
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ycyw_poc
+      POSTGRES_USER: ycyw_poc
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Copiez .env.example dans .env}
+    ports:
+      - '127.0.0.1:5433:5432'
+    volumes:
+      - chat_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL','pg_isready -U ycyw_poc -d ycyw_poc']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  api:
+    build: ./backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ycyw_poc
+      SPRING_DATASOURCE_USERNAME: ycyw_poc
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:?Mot de passe requis}
+      POC_CLIENT_TOKEN: ${POC_CLIENT_TOKEN:?Jeton client requis}
+      POC_AGENT_TOKEN: ${POC_AGENT_TOKEN:?Jeton conseiller requis}
+      APP_ALLOWED_ORIGIN: http://localhost:4200
+    ports:
+      - '127.0.0.1:8080:8080'
+    depends_on:
+      db:
+        condition: service_healthy
+
+  web:
+    build: ./frontend
+    ports:
+      - '127.0.0.1:4200:80'
+    depends_on:
+      - api
+
+volumes:
+  chat_data:
